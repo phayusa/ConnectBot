@@ -4,7 +4,7 @@ $(document).ready(function() {
         log_zone.val('');
     });
     $('.direction').on('click', function () {
-        var speed = $('.speed').val();
+        var speed = $('.speed :selected').text();
         var data = JSON.parse('{"characters":"'+ $(this).val() +'", "value":"'+ speed +'"}');
         $.ajax({
             type: "POST",
@@ -55,12 +55,26 @@ $(document).ready(function() {
 
     setInterval(function(){
         if ($('.camera').is(':checked')) {
-            var myImg = $('.img-stream');
+            var myImg = $('.img-stream.cam');
             var mySrc = window.image_url;
             var d = new Date();
             myImg.attr('src', mySrc + d.getTime());
         }
     }, 650);
+
+
+   $('.capture').on('click', function () {
+        var soundfile = $('.soundfile').attr('data-src');
+        var myImg = $('.capture-img');
+        var mySrc = window.image_url;
+        var d = new Date();
+        myImg.attr('src', mySrc + d.getTime());
+        var audio = new Audio();
+        audio.src = soundfile;
+        audio.controls = true;
+        audio.autoplay = true;
+   });
+
 
 
 });
