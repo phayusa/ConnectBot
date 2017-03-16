@@ -22,20 +22,32 @@
             android:layout_margin="30dp"
             android:layout_width="@dimen/size_text"
             android:hint="Username"
+            android:id="@+id/UserField"
             android:textColorHint="@color/colorPrimaryDark"
             android:textColor="@android:color/background_dark"
             android:layout_height="wrap_content" />
         <EditText
             android:layout_width="@dimen/size_text"
             android:textColor="@android:color/background_dark"
+            android:id="@+id/PwdField"
             android:textColorHint="@color/colorPrimaryDark"
             android:hint="Password"
+            android:inputType="textPassword"
             android:layout_height="wrap_content" />
+
+        <CheckBox
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Save password"
+            android:gravity="center"
+            android:id="@+id/checkRemember"
+            android:textColor="@android:color/white"
+            android:buttonTint="@color/colorPrimary"/>
 
         <Button
             android:layout_marginTop="@dimen/space_button"
             android:layout_width="@dimen/size_text"
-            android:height="@dimen/size_button  "
+            android:height="@dimen/size_button"
             android:text="Login"
             android:textColor="@android:color/black"
             android:background="@color/colorPrimary"
