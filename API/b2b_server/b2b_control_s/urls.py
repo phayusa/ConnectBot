@@ -17,16 +17,9 @@ from django.conf.urls import url
 from b2b_control_s.views.login import LoginView
 from b2b_control_s.views.command import CommandView
 from b2b_control_s.views.image import ImageView
-from rest_framework import routers
-
-router = routers.SimpleRouter()
-router.register(r'command/', CommandView, "command")
-router.register(r'image/get/', ImageView, "image")
 
 urlpatterns = [
     url(r'^users/login/$', LoginView.as_view()),
     url(r'^command/$', CommandView.as_view()),
     url(r'^image/get/', ImageView),
 ]
-
-urlpatterns += router.urls

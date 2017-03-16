@@ -1,6 +1,8 @@
 import pygame
 import pygame.camera
 from PIL import Image
+from rest_framework import status
+from rest_framework.response import Response
 from django.http import *
 
 
@@ -22,6 +24,8 @@ def get_captureFromCam():
 
 
 def ImageView(request):
+
+    # if request.GET.get('Authorization'):
     get_captureFromCam()
 
     # send the photo by a request
@@ -33,3 +37,4 @@ def ImageView(request):
         response = HttpResponse(content_type="image/jpeg")
         red.save(response, "JPEG")
         return response
+    # return Response(status=status.HTTP_401_UNAUTHORIZED)

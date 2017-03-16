@@ -29,7 +29,7 @@ ALLOWED_HOSTS = ['127.0.0.1', '172.16.14.119']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 # Application definition
 
@@ -53,7 +53,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -136,7 +136,7 @@ LOGIN_REDIRECT_URL = 'b2b_control:login'
 # Server URL
 API = {
     'default': {
-        'URL': 'https://127.0.0.1',
+        'URL': 'http://172.16.14.119',
         'PORT': '8001',
         'ROUTES': {
             'login': '/api/users/login/',
@@ -146,7 +146,7 @@ API = {
         },
     },
     'client': {
-        'URL': 'https://127.0.0.1',
+        'URL': 'http://172.16.14.119',
         'PORT': '8000',
         'ROUTES': {
             'command': '/command/',

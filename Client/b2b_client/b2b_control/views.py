@@ -4,7 +4,7 @@ from component.services.api import get_image as api_get_image
 from component.services.api import post_command as api_post_command
 from b2b_control.decorators import auth_required
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.core.urlresolvers import reverse
 
 
@@ -41,22 +41,22 @@ def logout(request):
 def control(request):
     return render(request, 'control/control.html')
 
-#Tester les envois de commande
+
+@auth_required
 def command(request):
-    if request.method == 'POST':
-        response = api_post_command(request)
-        if response.ok:
-            print 'command OK'
-            return HttpResponseRedirect(reverse('b2b_control:control'))
 
-        return render(request, 'registration/login.html')
-
-
-def image(request):
-    response = api_get_image(request, request.session['user']['token'])
+    response = api_post_command(request.POST, request.session['user']['token'])
     if response.ok:
-        print 'image OK'
-        return HttpResponseRedirect(reverse('b2b_control:control'))
+        return HttpResponse(response)
 
+    return render(request, 'registration/login.html')
+
+
+@auth_required
+def image(request):
+
+    response = api_get_image(request.session['user']['token'])
+    if response.ok:
+        return HttpResponse(response, content_type="image/jpeg")
     return render(request, 'registration/login.html')
 

@@ -3,7 +3,7 @@ $(document).ready(function() {
     $('.clear-log').on('click', function () {
         log_zone.val('');
     });
-    $('.direction').on('click', function (jqXHR) {
+    $('.direction').on('click', function () {
         var speed = $('.speed').val();
         var data = JSON.parse('{"characters":"'+ $(this).val() +'", "value":"'+ speed +'"}');
         $.ajax({
@@ -55,13 +55,10 @@ $(document).ready(function() {
 
     setInterval(function(){
         if ($('.camera').is(':checked')) {
-            function refresh() {
-                var myImg = $('.img-stream');
-                var mySrc = window.image_url;
-                var d = new Date();
-                myImg.attr('src', mySrc + d.getTime());
-            }
-            refresh();// This will run on page load
+            var myImg = $('.img-stream');
+            var mySrc = window.image_url;
+            var d = new Date();
+            myImg.attr('src', mySrc + d.getTime());
         }
     }, 650);
 

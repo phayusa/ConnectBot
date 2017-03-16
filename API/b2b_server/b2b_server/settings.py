@@ -26,11 +26,11 @@ SECRET_KEY = 'd#o*^#ape8qp)2kziuv@*^!zx#f$401t@-zs87f+&($g2!d64b'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.16.14.119']
+ALLOWED_HOSTS = ['127.0.0.1', '172.16.14.119', '172.24.1.1']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = False
 
 # Application definition
 

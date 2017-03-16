@@ -26,5 +26,5 @@ urlpatterns = [
        url(r'^accounts/logout/$', views.logout, name='logout'),
        url(r'^control/$', views.control, name='control'),
        url(r'^command/$', views.command, name='command'),
-       url(r'^image/$', views.image, name='image'),
+       url(r'^image/[0-9]*$', views.image, name='image'),
 ]

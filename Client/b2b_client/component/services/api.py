@@ -112,7 +112,7 @@ def login(params):
 def get_user(user_name, token):
     """
     Retrieve user
-    :param user_email:
+    :param user_name:
     :param token:
     :return:
     """
@@ -122,26 +122,27 @@ def get_user(user_name, token):
     return get_call(url, headers=headers)
 
 
-def get_image(user_name, token):
+def get_image(token):
     """
     Retrieve user
-    :param user_email:
+    :param params:
     :param token:
     :return:
     """
     url = get_url('image')
     headers = header_token(token)
 
-    return get_call(url, headers=headers)
+    return get_call(url, params=headers, headers=headers)
 
 
-def post_command(params):
+def post_command(params, token):
     """
-    Retrieve user
-    :param user_email:
+    Post command
+    :param params:
     :param token:
     :return:
     """
     url = get_url('command')
+    headers = header_token(token)
 
-    return post_call(url, params=params)
+    return post_call(url, params=params, headers=headers)
