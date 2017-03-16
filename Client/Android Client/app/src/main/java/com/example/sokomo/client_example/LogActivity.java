@@ -16,7 +16,9 @@ import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -84,22 +86,28 @@ public class LogActivity extends Activity {
                 writer.write(toSendData.toString());
                 writer.flush();
 
+                InputStreamReader reader = new InputStreamReader(conn.getInputStream());
+                BufferedReader buff = new BufferedReader(reader);
+
                 responseString = conn.getResponseMessage();
 
                 if (conn.getResponseMessage().equals("Created")){
-                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(i);
-                    responseString = "Login";
-                }
+                    String token;
+                    try {
+                        JSONObject receiveJson = new JSONObject(buff.readLine());
+                        token = receiveJson.getString("token");
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        i.putExtra(getString(R.string.key_token),token);
+                        i.putExtra(getString(R.string.key_ip),params[1]);
+                        startActivity(i);
+                        responseString = " Welcome "+username;
+                    }catch (JSONException e){
+                        e.printStackTrace();
+                        return "Problem with the receive json";
+                    }
 
-                /*
-                if(conn.getResponseCode() == HttpsURLConnection.HTTP_CREATED){
-                    responseString = params[1] + " Send";
+
                 }
-                else {
-                    responseString = "Problem with the data send";
-                }
-                */
 
             } catch (IOException e) {
                 responseString = "Problem with internet connection";
@@ -126,18 +134,20 @@ public class LogActivity extends Activity {
         SharedPreferences sharedPref = getSharedPreferences(prefName, Context.MODE_PRIVATE);
         String username = sharedPref.getString(getString(R.string.key_username),"");
         String password = sharedPref.getString(getString(R.string.Password),"");
+        String ip = sharedPref.getString(getString(R.string.key_ip),"");
 
         ((EditText) findViewById(R.id.UserField)).setText(username);
         ((EditText) findViewById(R.id.PwdField)).setText(password);
+        ((EditText) findViewById(R.id.ipAdress)).setText(ip);
     }
 
     public void connectionClient(View v){
-        String ip = "172.16.14.119:8001";
+        String ip = ((EditText) findViewById(R.id.ipAdress)).getText().toString();
         String url = "http://"+ip+"/api/users/login/";
         String username = ((TextView) findViewById(R.id.UserField)).getText().toString();
         String password = ((TextView) findViewById(R.id.PwdField)).getText().toString();
 
-        new LogRequest(username,password).execute(url);
+        new LogRequest(username,password).execute(url,ip);
 
 
     }
@@ -155,6 +165,9 @@ public class LogActivity extends Activity {
             String password = ((TextView) findViewById(R.id.PwdField)).getText().toString();
             editor.putString(getString(R.string.Password), password);
         }
+
+        String ip = ((EditText) findViewById(R.id.ipAdress)).getText().toString();
+        editor.putString(getString(R.string.key_ip),ip);
         editor.commit();
     }
 }

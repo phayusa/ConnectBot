@@ -34,11 +34,24 @@ except serial.serialutil.SerialException :
 
 ser.isOpen()
 
+try:
+	url = "http://"+ip+"/api/users/login"
+	data = {"username" : "geoffrey", "password" : "geoffrey"}
+	headers = {'Content-type' : 'application/json'}
+	r = requests.post(url,data=json.dumps(data),headers=headers)
+	token = json.loads(r.text)["token"]
+except requests.exceptions.ConnectionError:
+	print "Error : You try to catch an impossible connection"
+	exit(1)
+
+url = "http://"+ip+"/api/command"
+
 # getting the command on continue
 while (1):
 	try :
-		url = "http://"+ip+"/Api/command.json"
-		resp = requests.get(url=url)
+		dataToken = {"Authorization" : "JWT"+token}
+		url = "http://"+ip+"/api/command.json"
+		resp = requests.get(url=url, headers=dataToken)
 		data = json.loads(resp.text)
 	except requests.exceptions.ConnectionError :
 		print "Error : You try to catch an impossible connection"

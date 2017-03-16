@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.AsyncTask;
+import android.os.PersistableBundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
     public final int PERMISSION_REQUEST_KEY = 1102;
     private CameraThread cam;
     private Timer camTimer;
+    protected String token;
+    protected String ipAdress;
 
     public void checkPermission(){
         // Here, thisActivity is the current activity
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     class RequestTask extends AsyncTask<String, Void, String> {
 
+
         public boolean isOnline() {
             ConnectivityManager cm =
                     (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -82,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
-            System.out.println("to send "+params[1]);
 
             if (!isOnline()){
                 return "You do not have internet access";
@@ -96,7 +99,8 @@ public class MainActivity extends AppCompatActivity {
                 conn.setRequestMethod("POST");
                 conn.setDoOutput(true);
                 conn.setRequestProperty("Content-Type","application/json");
-                System.out.println("after call");
+                conn.setRequestProperty("Authorization","JWT "+token);
+                System.out.println(token);
 
 
                 JSONObject toSendData = new JSONObject();
@@ -107,16 +111,16 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                     return "Problem with the send of Json";
                 }
+                System.out.println("Data "+toSendData.toString());
 
                 OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
                 writer.write(toSendData.toString());
                 writer.flush();
 
-                if(conn.getResponseCode() == HttpsURLConnection.HTTP_CREATED){
-                    responseString = params[1] + " Send";
-                }
-                else {
-                    responseString = "Problem with the data send";
+                if (conn.getResponseCode() == HttpURLConnection.HTTP_CREATED) {
+                    responseString = "Send "+params[2];
+                }else {
+                    responseString = "Incorrect login";
                 }
             } catch (IOException e) {
                 responseString = "Problem with internet connection";
@@ -129,7 +133,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             System.out.println("result "+result);
-            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
+            if (result != "")
+                Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -137,7 +142,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Bundle extras = getIntent().getExtras();
+        token = extras.getString(getString(R.string.key_token));
+        ipAdress = extras.getString(getString(R.string.key_ip));
     }
 
     @Override
@@ -150,40 +157,48 @@ public class MainActivity extends AppCompatActivity {
         checkPermission();
         int value = ((ImageButton) view).getId();
         String characterToSend = "";
+        String typeCmd = "";
         switch (value){
             case R.id.up:
                 characterToSend = "o";
+                typeCmd = "Up";
                 break;
             case R.id.down:
                 characterToSend = "l";
+                typeCmd = "Down";
                 break;
             case R.id.left:
                 characterToSend = "k";
+                typeCmd = "Left";
                 break;
             case R.id.right:
                 characterToSend = "m";
+                typeCmd = "Right";
                 break;
             case R.id.rot_left:
                 characterToSend = "a";
+                typeCmd = "Rotation Left";
                 break;
             case R.id.rot_right:
                 characterToSend = "e";
+                typeCmd = "Rotation right";
                 break;
             case R.id.stop:
                 characterToSend = "STOP";
+                typeCmd = "Stop";
                 break;
         }
 
-        String ipAdress = ((EditText) findViewById(R.id.ip_text)).getText().toString();
-        new RequestTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"https://"+ipAdress+"/api/command/",characterToSend);
+
+        //String ipAdress = ((EditText) findViewById(R.id.ip_text)).getText().toString();
+        new RequestTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"http://"+ipAdress+"/api/command/",characterToSend,typeCmd);
     }
 
     public void cameraListener(View view){
         CheckBox toggle = ((CheckBox) view);
-        String ip = ((EditText) findViewById(R.id.ip_text)).getText().toString();
         if (toggle.isChecked()){
             camTimer = new Timer();
-            camTimer.schedule(new CameraThread(getApplicationContext(), ip, ((ImageView) findViewById(R.id.cameraContainer))),0,500);
+            camTimer.schedule(new CameraThread(getApplicationContext(), ipAdress, ((ImageView) findViewById(R.id.cameraContainer))),0,500);
             //new CameraAsyncTask(getApplicationContext(), ((ImageView) findViewById(R.id.cameraContainer)),"http://"+ip+"/Api/image/get/").execute();
 
         }else{

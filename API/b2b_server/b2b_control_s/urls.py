@@ -17,9 +17,11 @@ from django.conf.urls import url
 from b2b_control_s.views.login import LoginView
 from b2b_control_s.views.command import CommandView
 from b2b_control_s.views.image import ImageView
+from b2b_control_s.views.message import MessageList
 
 urlpatterns = [
     url(r'^users/login/$', LoginView.as_view()),
     url(r'^command/$', CommandView.as_view()),
     url(r'^image/get/', ImageView),
+    url(r'^message/$', MessageList.as_view()),
 ]

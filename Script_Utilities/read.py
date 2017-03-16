@@ -16,7 +16,6 @@ for arg in sys.argv:
     elif arg[:9] == "baudrate=":
         port = arg[9:]
 
-
 try :
     # configure the serial connections (the parameters differs on the device you are connecting to)
     ser = serial.Serial()
@@ -34,7 +33,7 @@ while (1):
     readData = ser.readline()
     print "read " + readData
     try :
-    	url = "http://"+ip+"/Api/message.json"
+    	url = "http://"+ip+"/api/message.json"
     	data = {'message' : readData}
     	headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
     	r = requests.post(url, data=json.dumps(data), headers=headers)

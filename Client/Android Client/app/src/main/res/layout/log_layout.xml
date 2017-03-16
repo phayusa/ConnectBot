@@ -36,13 +36,20 @@
             android:layout_height="wrap_content" />
 
         <CheckBox
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Save password"
             android:gravity="center"
             android:id="@+id/checkRemember"
             android:textColor="@android:color/white"
             android:buttonTint="@color/colorPrimary"/>
+
+        <EditText
+            android:layout_marginTop="30dp"
+            android:layout_width="@dimen/size_text"
+            android:id="@+id/ipAdress"
+            android:hint="IpAdress"
+            android:layout_height="wrap_content" />
 
         <Button
             android:layout_marginTop="@dimen/space_button"
