@@ -2,12 +2,16 @@
 {% load static %}
 
 {% block content %}
+    <div class="soundfile" data-src="{% static "sound/screenshot.mp3" %}"></div>
+
     <div class="col-md-4">
         <div class="row stream">
-            <img class="img-stream" src=""/>
+            <img class="img-stream scop" src="{% static "img/scop.png" %}"/>
+            <img class="img-stream cam" src=""/>
         </div>
         <div class="row">
             <label for="camera">Webcam</label><input id="camera" class="camera" type="checkbox">
+            <button id="capture" class="capture" value="screenshot">Capture</button>
         </div>
     </div>
 
@@ -28,7 +32,11 @@
             <button class='col-md-12 direction direction-stop' value="STOP"><img class="img-responsive img-stop" src="{% static "img/stop.png" %}"/></button>
         </div>
         <div class="row">
-            <label for="speed"> Vitesse </label><input class="speed" placeholder="Speed value" value="1"/>
+            <label for="speed"> Vitesse </label>
+            <select class="speed">
+                <option value="1">1</option>
+                <option value="2">2</option>
+            </select>
         </div>
     </div>
 
@@ -41,6 +49,11 @@
         </div>
     </div>
 
+    <div class="col-md-6">
+        <div class="row">
+            <img class="capture-img" src=""/>
+        </div>
+    </div>
 
 {% endblock %}
 

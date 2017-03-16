@@ -11,6 +11,10 @@ body {
     text-align: center;
 }
 
+.row.stream {
+    text-align: left;
+}
+
 .row-stop {
     height: 70px;
 }
@@ -22,9 +26,15 @@ body {
 }
 
 .img-stream {
+    position: absolute;
     height: 250px;
     width: 100%;
     margin: 40px 0;
+}
+
+.img-stream.scop {
+    z-index: 100;
+    opacity: 0.5;
 }
 
 .row.command {
@@ -50,19 +60,36 @@ body {
 /* mobile phone */
 @media all and (max-width: 768px) {
     .img-stream {
-        height: 100px;
-        width: 50%;
+        position: relative;
+        height: 200px;
+        width: 60%;
         margin: 11px auto 5px auto;
 
     }
 
+    .row.stream {
+        text-align: center;
+    }
+
+    .img-stream.scop {
+        position: absolute;
+        z-index: 100;
+        opacity: 0.5;
+    }
+
     .direction {
-        width: 80px;
+        width: 60px;
         height: 100%;
     }
 
     .direction-stop {
         width: 150px;
+    }
+
+    .row.command {
+        height: 40px;
+        width: 100%;
+        margin: 20px 0;
     }
 
     .row.log textarea {

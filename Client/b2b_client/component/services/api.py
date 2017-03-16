@@ -36,7 +36,7 @@ def get_call(url, params=None, headers=None):
     :param headers:
     :return:
     """
-    response = requests.get(url, params=params, headers=headers, verify=False)
+    response = requests.get(url, params=params, headers=headers)
 
     if response.status_code == 401:
         raise RedirectException(reverse('b2b_control:logout'))
@@ -56,8 +56,9 @@ def post_call(url, params=None, json=None, headers=None):
     if params is None:
         params = {}
 
-    response = requests.post(url, data=params, json=json, headers=headers, verify=False)
+    response = requests.post(url, data=params, json=json, headers=headers)
 
+    print response.status_code
     if response.status_code == 401:
         raise RedirectException(reverse('logout'))
 
@@ -75,7 +76,7 @@ def put_call(url, params=None, headers=None):
     if params is None:
         params = {}
 
-    response = requests.put(url, data=params, headers=headers, verify=False)
+    response = requests.put(url, data=params, headers=headers)
 
     if response.status_code == 401:
         raise RedirectException(reverse('b2b_control:logout'))
@@ -90,7 +91,7 @@ def delete_call(url, headers=None):
     :param headers:
     :return:
     """
-    response = requests.delete(url, headers=headers, verify=False)
+    response = requests.delete(url, headers=headers)
 
     if response.status_code == 401:
         raise RedirectException(reverse('b2b_control:logout'))
@@ -132,7 +133,7 @@ def get_image(token):
     url = get_url('image')
     headers = header_token(token)
 
-    return get_call(url, params=headers, headers=headers)
+    return get_call(url, headers=headers)
 
 
 def post_command(params, token):
@@ -145,4 +146,4 @@ def post_command(params, token):
     url = get_url('command')
     headers = header_token(token)
 
-    return post_call(url, params=params, headers=headers)
+    return post_call(url, json=params, headers=headers)

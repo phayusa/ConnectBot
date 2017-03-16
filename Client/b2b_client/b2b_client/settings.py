@@ -25,7 +25,7 @@ SECRET_KEY = '-a6&)xj=uke@_uzburqq9%i)_)w#^c$0clubdwod5zgc0wvy0r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '172.16.14.119']
+ALLOWED_HOSTS = ['127.0.0.1', '172.16.14.119', '172.16.16.105']
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -136,8 +136,8 @@ LOGIN_REDIRECT_URL = 'b2b_control:login'
 # Server URL
 API = {
     'default': {
-        'URL': 'http://172.16.14.119',
-        'PORT': '8001',
+        'URL': 'http://172.24.1.1',
+        'PORT': '8000',
         'ROUTES': {
             'login': '/api/users/login/',
             'users': '/api/user/profile/',

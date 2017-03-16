@@ -44,8 +44,8 @@ def control(request):
 
 @auth_required
 def command(request):
-
     response = api_post_command(request.POST, request.session['user']['token'])
+
     if response.ok:
         return HttpResponse(response)
 
