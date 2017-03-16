@@ -1,0 +1,89 @@
+
+/* ==========================================================================
+   Command custom styles
+   ========================================================================== */
+body {
+    padding-top: 10px;
+
+}
+
+.row {
+    text-align: center;
+}
+
+.row-stop {
+    height: 70px;
+}
+
+.img-stop {
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-stream {
+    height: 250px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.row.command {
+    height: 70px;
+    width: 100%;
+    margin: 40px 0;
+}
+
+.row.log textarea {
+    margin: 40px 0;
+    width: 100%;
+    height: 250px;
+}
+
+.direction {
+    height:auto;
+}
+
+.direction-stop {
+    height: 100%;
+}
+
+/* mobile phone */
+@media all and (max-width: 768px) {
+    .img-stream {
+        height: 100px;
+        width: 50%;
+        margin: 11px auto 5px auto;
+
+    }
+
+    .direction {
+        width: 80px;
+        height: 100%;
+    }
+
+    .direction-stop {
+        width: 150px;
+    }
+
+    .row.log textarea {
+        margin: 20px 0;
+        width: 90%;
+        height: 100px;
+    }
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+
+
+
+
+
+
+
+
+
+
+

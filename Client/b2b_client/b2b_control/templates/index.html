@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block content %}
+   <a href="{% url 'b2b_control:login' %}">Se connecter</a>
+{% endblock %}

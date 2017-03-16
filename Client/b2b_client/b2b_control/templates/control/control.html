@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="col-md-4">
+        <div class="row stream">
+            <img class="img-stream" src=""/>
+        </div>
+        <div class="row">
+            <label for="camera">Webcam</label><input id="camera" class="camera" type="checkbox">
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="row command">
+            <button class='col-md-4 direction' value="a"><img class="img-responsive" src="{% static "img/arrow-35.png" %}"/></button>
+            <button class='col-md-4 direction forward' value="o"><img class="img-responsive" src="{% static "img/34-202.png" %}"/></button>
+            <button class='col-md-4 direction' value="e"><img class="img-responsive" src="{% static "img/arrow-34.png" %}"/></button>
+        </div>
+        <div class="row command">
+            <button class='col-md-4 direction' value="k"><img class="img-responsive" src="{% static "img/34-203.png" %}"/></button>
+            <button class='col-md-4 direction' value="l"><img class="img-responsive" src="{% static "img/34-201.png" %}"/></button>
+            <button class='col-md-4 direction' value="m"><img class="img-responsive" src="{% static "img/34-200.png" %}"/></button>
+
+        </div>
+
+        <div class="row command row-stop">
+            <button class='col-md-12 direction direction-stop' value="STOP"><img class="img-responsive img-stop" src="{% static "img/stop.png" %}"/></button>
+        </div>
+        <div class="row">
+            <label for="speed"> Vitesse </label><input class="speed" placeholder="Speed value" value="1"/>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="row log">
+            <textarea class='log-zone'></textarea>
+        <div class="row">
+        </div>
+            <a class='clear-log' href="#">Clear log</a>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+{% block footer %}
+     <p><a href="{% url 'b2b_control:logout' %}">Déconnexion</a></p>
+{% endblock %}

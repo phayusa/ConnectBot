@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_marginTop="@dimen/to_center"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Robot Controller"
+            android:textSize="@dimen/small_space"
+            android:textColor="@color/textColor" />
+
+        <EditText
+            android:layout_margin="30dp"
+            android:layout_width="@dimen/size_text"
+            android:hint="Username"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:textColor="@android:color/background_dark"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_width="@dimen/size_text"
+            android:textColor="@android:color/background_dark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="Password"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_marginTop="@dimen/space_button"
+            android:layout_width="@dimen/size_text"
+            android:height="@dimen/size_button  "
+            android:text="Login"
+            android:textColor="@android:color/black"
+            android:background="@color/colorPrimary"
+            android:onClick="connectionClient"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

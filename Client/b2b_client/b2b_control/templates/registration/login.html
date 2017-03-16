@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{#{% load crispy_forms_tags %}#}
+
+{% block title %}Login{% endblock %}
+
+{% block toggle_login %}{% endblock %}
+
+{% block content %}
+  <div class="login">
+    <a href="{% url 'b2b_control:index' %}"><img  id="logo_login" alt='b2b' src="{% static 'img/stop.png' %}"></a>
+    <h2>Se connecter</h2>
+    <form method="post">
+        {% if errors %}
+            <ol>
+                {% for error in errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+            </ol>
+        {% endif %}
+        {% csrf_token %}
+        {% for form_loop in form %}
+          <div class="group">
+            {{ form_loop }}
+            <span class="highlight"></span><span class="bar"></span>
+            <label>{{ form_loop.name }}</label>
+          </div>
+        {% endfor %}
+        <button class="button buttonBlue" type="submit">Se connecter
+        <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div></button>
+        </form>
+  </div>
+{% endblock %}
