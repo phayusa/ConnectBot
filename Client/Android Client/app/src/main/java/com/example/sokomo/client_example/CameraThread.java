@@ -25,7 +25,7 @@ public class CameraThread extends TimerTask  {
 
     @Override
     public void run() {
-        new CameraAsyncTask(activyContext,image,"http://"+ip+"/Api/image/get/").execute();
+        new CameraAsyncTask(activyContext,image,"https://"+ip+"/api/image/get/").execute();
 
     }
 

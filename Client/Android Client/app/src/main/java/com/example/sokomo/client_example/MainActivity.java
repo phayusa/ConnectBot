@@ -129,8 +129,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             System.out.println("result "+result);
-            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT);
-            //((TextView) findViewById(R.id.informationText)).setText(result);
+            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -176,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         String ipAdress = ((EditText) findViewById(R.id.ip_text)).getText().toString();
-        new RequestTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"http://"+ipAdress+"/Api/command/",characterToSend);
+        new RequestTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,"https://"+ipAdress+"/api/command/",characterToSend);
     }
 
     public void cameraListener(View view){
