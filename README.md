@@ -13,6 +13,9 @@ Receive scripts are also include in the project in Script_Utilities folder.
 * `pip install django-sslserver`
 * `pip install pygame` or linux : `apt-get install python-pygame`
 * `pip install djangorestframework-jwt`
+* `pip install djangosecure`
+* `pip install pillow`
+
 
 ## Run
 ### Server (API/b2b_server)
